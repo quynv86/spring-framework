@@ -1,10 +1,24 @@
 spring:
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          uri: file:///Users/quynv/Research/config-local
+  application:
+    name: application-configserver
   cloud:
     config:
       server:
-        git:
-          uri: file:///Users/quynv/Research/config-local
-  application:
-    name: application-configserver
+        jdbc:
+          enabled: true
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:file:./shared-folder/database;AUTO_SERVER=TRUE
+      username: sa
+      password: sa
+      driver-class-name: org.h2.Driver
 server:
   port: 8888
+logging:
+  level:
+    root: DEBUG
