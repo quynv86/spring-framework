@@ -4,7 +4,7 @@ There are several modules as bellow:
 ```aidl
     <modules>
       <module>spring-integration</module>
-       <module>shared-domain</module>
+      <module>shared-domain</module>
       <module>spring-rest-api</module>
       <module>spring-config-server</module>
     </modules>
