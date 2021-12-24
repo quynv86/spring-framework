@@ -1,0 +1,6 @@
+/spring-config-server/target/
+/shared-folder/
+/spring-integration/target/
+/spring-rest-api/target/
+/shared-domain/target/
+/.idea/

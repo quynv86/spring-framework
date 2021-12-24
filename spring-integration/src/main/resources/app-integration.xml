@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int-file="http://www.springframework.org/schema/integration/file"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-http="http://www.springframework.org/schema/integration/http"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:int-jdbc="http://www.springframework.org/schema/integration/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/integration/file
+       http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
+       http://www.springframework.org/schema/integration/http
+       http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
+       http://www.springframework.org/schema/integration
+       http://www.springframework.org/schema/integration/spring-integration.xsd
+       http://www.springframework.org/schema/integration/jdbc http://www.springframework.org/schema/integration/jdbc/spring-integration-jdbc.xsd
+       http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+">
+    <int-file:inbound-channel-adapter directory="/Users/quynv/Research/spring-framework/spring-integration/shared-folder" channel="input" filename-pattern="*.txt">
+        <int:poller fixed-rate="500" error-channel="movieErrorChannel"/>
+    </int-file:inbound-channel-adapter>
+
+
+    <!-- Direct channel -->
+    <int:channel id="input"></int:channel>
+    <int:channel id="movieErrorChannel"/>
+
+    <int:service-activator id="movieProcessor" input-channel="input" ref="movieHandler"/>
+    <int:service-activator id="movieErrorProcessor" input-channel="movieErrorChannel" ref="movieErrorHandler"/>
+
+
+    <!-- Movie Channel To Handle HTTP Request -->
+    <int:channel id="singleMovieChannel"/>
+    <int:publish-subscribe-channel id="publishSubscribeChannel"/>
+
+    <int-http:inbound-channel-adapter id="singleMovieAdt"
+        supported-methods="POST" channel="publishSubscribeChannel"
+        path="/v2/movie"
+        request-payload-type="vn.quynv.springframework.domain.Movie"
+        status-code-expression="T(org.springframework.http.HttpStatus).ACCEPTED"
+    />
+
+    <int:service-activator id="singleMovieHandler" input-channel="publishSubscribeChannel" ref="movieHttpHandler" method="handleSingleMovie"/>
+    <int:service-activator id="emailMovieHandler" input-channel="publishSubscribeChannel" ref="movieEmailHandler" method="sendEmail"/>
+
+    <!-- Movie Channel To Handle HTTP Request Multiple movies -->
+
+    <int:channel id="multiMovieChannel">
+        <int:queue message-store="messageStore"/>
+    </int:channel>
+    <int-http:inbound-channel-adapter id="multiMovieAdt"
+                                      supported-methods="POST" channel="multiMovieChannel"
+                                      path="/v2/movies"
+                                      request-payload-type="vn.quynv.springframework.domain.Movie[]"
+                                      status-code-expression="T(org.springframework.http.HttpStatus).ACCEPTED"
+    />
+
+    <int:service-activator id="multiMovieHandler" input-channel="multiMovieChannel" ref="movieHttpHandler" method="handleMultipleMovie">
+        <int:poller fixed-rate="500"/>
+    </int:service-activator>
+
+
+    <!-- To config JDBC Store -->
+    <int-jdbc:message-store id="messageStore" data-source="dataSource" table-prefix="INT_"/>
+
+</beans>
