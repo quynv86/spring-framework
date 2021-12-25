@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: movie-web
+  jmx:
+    enabled: true
+  cloud:
+    config:
+      uri:
+        - http://localhost:8888
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:file:./shared-folder/database;AUTO_SERVER=TRUE
+      username: sa
+      password: sa
+      driver-class-name: org.h2.Driver
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health,info,refresh
+server:
+  port: 8181

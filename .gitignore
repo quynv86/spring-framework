@@ -5,3 +5,4 @@
 /shared-domain/target/
 /.idea/
 /spring-cloud-integration/target/
+/spring-cloud-integration-http-inbound/target/

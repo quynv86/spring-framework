@@ -23,6 +23,7 @@
       <module>spring-rest-api</module>
       <module>spring-config-server</module>
       <module>spring-cloud-integration</module>
+      <module>spring-cloud-integration-http-inbound</module>
     </modules>
 
   <dependencyManagement>
