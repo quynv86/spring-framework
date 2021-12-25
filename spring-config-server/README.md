@@ -1,5 +1,5 @@
 ### Config server essentials
-#### 1. Reference links: 
+#### 1. Reference links:
     https://cloud.spring.io/spring-cloud-config/multi/multi__spring_cloud_config_server.html
     1.1 Support JDBC Backend Config Server.
 

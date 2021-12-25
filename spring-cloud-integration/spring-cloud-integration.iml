@@ -92,8 +92,11 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.13.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.13.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.integration:spring-integration-http:5.5.6" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.integration:spring-integration-file:5.5.6" level="project" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.11.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.integration:spring-integration-jdbc:5.5.6" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:5.3.13" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-configuration-processor:2.6.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.h2database:h2:1.4.200" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-starter-test:2.6.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test:2.6.1" level="project" />

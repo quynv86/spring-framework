@@ -17,7 +17,7 @@ public class MovieController {
 
     @PostMapping(value="/v1/movie", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<String> movie(@RequestBody Movie movie) {
-        log.info("Movie received : {}", movie.toString());
+        log.info("============>> Movie received : {}", movie.toString());
         return new ResponseEntity<String>(HttpStatus.ACCEPTED);
     }
 

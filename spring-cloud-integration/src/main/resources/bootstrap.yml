@@ -1,0 +1,20 @@
+#  It is important to know that by convention, you must use a bootstrap.yml file in your client
+#  because your main configuration now resides in the Git repository or any storage you used to centralize your configuration.
+#  From now on, we are going to use YAML files, which offer a simple hierarchy and are easy to read.
+#  Beware, though, that you need to have a least two-space indentations for any new property
+
+spring:
+  application:
+    name: movies
+  jmx:
+    enabled: true
+  cloud:
+    config:
+      uri:
+        - http://localhost:8888
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health,info,refresh
