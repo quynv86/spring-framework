@@ -24,6 +24,7 @@
       <module>spring-config-server</module>
       <module>spring-cloud-integration</module>
       <module>spring-cloud-integration-http-inbound</module>
+      <module>spring-data-jpa</module>
     </modules>
 
   <dependencyManagement>
