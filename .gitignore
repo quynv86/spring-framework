@@ -7,3 +7,4 @@
 /spring-cloud-integration/target/
 /spring-cloud-integration-http-inbound/target/
 /spring-data-jpa/target/
+/reactor-core/target/

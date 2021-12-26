@@ -70,6 +70,7 @@ public class CustomerResTest {
     }
 
     @Test
+    @Transactional
     void when_Select_All_Customer() {
         Long count = customerRes.findAll().stream().count();
         log.info("========>Total customer: {}", count);
