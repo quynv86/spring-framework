@@ -316,23 +316,4 @@ public class R2dbcTest {
             log.info("Loaded: {}", user);
         });
     }
-    /*
-    *     @Test
-    void read_File_Using_Flux() {
-        final String PATH = "/Users/quynv/Research/spring-framework/shared-folder/movie_2.txt";
-        Path ipPath = Paths.get(PATH);
-        Flux<String> fluxLine = Flux.using(
-                () -> Files.lines(ipPath)
-                ,(streamLine) -> Flux.fromStream(streamLine)
-                ,(streamLine) -> streamLine.close()
-        ).subscribeOn(Schedulers.newParallel("New-Thread",3));
-        fluxLine.log().subscribe(
-                (line) -> log.info("Thread {} : {}", Thread.currentThread().getName(),line)
-                ,(error)-> log.error("Thread {} An error occured {}", Thread.currentThread().getName(),error)
-                ,() -> log.info("Compeleted")
-                ,(subscription) -> subscription.request(10)
-        );
-
-    }
-    * */
 }

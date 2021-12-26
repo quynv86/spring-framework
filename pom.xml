@@ -26,6 +26,7 @@
       <module>spring-cloud-integration-http-inbound</module>
       <module>spring-data-jpa</module>
       <module>reactor-core</module>
+        <module>spring-webflux-r2dbc</module>
     </modules>
 
   <dependencyManagement>

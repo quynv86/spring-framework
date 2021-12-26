@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscription;
 import reactor.core.publisher.BaseSubscriber;
 import reactor.core.publisher.Flux;
@@ -158,5 +159,49 @@ public class AppTest {
                         ,(error)->{
                             log.error("An error occured {}", error);
                         });
+    }
+
+    @Test void create_Flux_And_Test_WINDOW_clause() throws InterruptedException {
+        Flux.range(1,10).window(2)
+                .doOnSubscribe(sub -> {
+                    log.info("Split to batch 2 items");
+                })
+                .doOnComplete(()-> log.info("Completed All Batch"))
+                .publishOn(Schedulers.newParallel("new_thread",3))
+                .subscribeOn(Schedulers.boundedElastic())
+                .subscribe(fluxItem -> {
+                    fluxItem
+                            .doOnSubscribe(subscription -> {
+                                log.info(" On Subscribe ----");
+                            })
+                     .doOnComplete(()->log.info("---------Completed!!------"))
+                    .subscribe((number)->log.info("Processing ---> {}", number));
+        });
+        Thread.sleep(2_000);
+    }
+
+    @Test void using_Metrics() throws InterruptedException {
+        Schedulers.enableMetrics();
+        Flux.range(1,10)
+                .name("integer-stream")
+                .metrics()
+                .doOnNext(event-> log.info("Received event: {}", event))
+                .delayUntil(this::processEvent)
+                .retry()
+                .subscribe();
+
+        Thread.sleep(20_000);
+    }
+
+    public Publisher<Integer>  processEvent(int number) {
+        log.info("Processing event: {}", number);
+        try {
+            Thread.sleep(1_000);
+        }catch(Exception ex){
+
+        }
+        log.info("Processed event: {}", number);
+
+        return Flux.fromIterable(Arrays.asList(number));
     }
 }
