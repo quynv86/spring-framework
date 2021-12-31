@@ -1,0 +1,105 @@
+docker run -d \
+--name kb-container \
+--net es-net \
+-p 5601:5601 \
+-e ELASTICSEARCH_HOSTS=http://es-container:9200 \
+docker.elastic.co/kibana/kibana:7.11.0
+
+
+
+docker run -d \
+--name es-container \
+--net es-net \
+-p 9200:9200 \
+-e xpack.security.enabled=false \
+-e discovery.type=single-node \
+-e xpack.monitoring.elasticsearch.ssl.verification_mode=none
+docker.elastic.co/elasticsearch/elasticsearch:7.11.0
+
+1. Create Nework Adapter:
+	docker network create es-net --driver=bridge
+
+2. Run Elastic Search:
+	docker run -d --name es-container --net es-net -p 9200:9200 -e xpack.security.enabled=false docker.elastic.co/elasticsearch/elasticsearch:7.11.0
+
+
+
+3. docker.elastic.co/elasticsearch/elasticsearch:7.11.0
+docker pull docker.elastic.co/logstash/logstash:7.11.0
+
+version: "3.0"
+services:
+  elasticsearch:
+    container_name: es-container
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.11.0
+    environment:
+      - xpack.security.enabled=false
+      - "discovery.type=single-node"
+    networks:
+      - es-net
+    ports:
+      - 9200:9200
+  kibana:
+    container_name: kb-container
+    image: docker.elastic.co/kibana/kibana:7.11.0
+    environment:
+      - ELASTICSEARCH_HOSTS=http://es-container:9200
+    networks:
+      - es-net
+    depends_on:
+      - elasticsearch
+    ports:
+      - 5601:5601
+networks:
+  es-net:
+    driver: bridge
+
+
+version: '3'
+services:
+  nginx:
+    image: nginx:1.11.8-alpine
+    ports:
+      - "8081:80"
+    volumes:
+      - my_test_volume:/usr/share/app
+volumes:
+  my_test_volume:
+    driver: local
+    driver_opts:
+       o: bind
+       type: none
+       device: /home/jinna/Jinna_Balu/Test_volume
+
+
++++++++++++++++++
+
+Create Shared Volume: 
+docker volume create --name sharedvolume --opt device=/Users/quynv/Research/docker-volume --opt o=bind --opt type=none
+
+docker run -d --mount source=sharedvolume,target=/usr/share/logstash/pipeline/ --net es-net --name logs-container docker.elastic.co/logstash/logstash:7.11.0
+
+
+
+https://cuongquach.com/elk-tim-hieu-dich-vu-logstash-trong-he-thong-elk-stack-logging.html
+
+
+
+
+docker run -d --name es-container --net es-net -p 9200:9200 -e xpack.security.enabled=false -e discovery.type=single-node docker.elastic.co/elasticsearch/elasticsearch:7.11.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
