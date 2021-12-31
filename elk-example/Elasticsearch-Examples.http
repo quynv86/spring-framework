@@ -1,0 +1,97 @@
+### Query All Message level field must match "INFO"
+## 1. Match: Tim trong cac truong gap bat cu ky tu nao trong chuoi
+##         Vi du : match {message: "Spring Framework"} ==> Nghia la tim tat ca elements co truong message chua chu Spring, hoac Framework
+## 2. Match phrase : la chu chinh xac chuoi : Giong tim kim them dau "" cua Google
+
+POST http://localhost:9200/logback-2021.12.27/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "bool": {
+      "must": [{"match_phrase":
+        {
+          "message":"Total Trans: 7"
+        }
+        }
+      ]
+    }
+  }
+}
+
+
+### List all Indexes:
+GET http://localhost:9200/_cat/indices?v
+
+### Lay thong tin cua 1 index
+GET http://localhost:9200/logback-2021.12.27
+
+###
+POST http://localhost:9200/logback-2021.12.27/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "regexp": {
+            "message": "*"
+          }
+        },
+        {
+          "match_phrase": {
+            "level": "INFO"
+          }
+        }
+      ]
+    }
+  }
+}
+
+
+
+###
+
+POST http://localhost:9200/logback-2021.12.27/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "constant_score": {
+      "filter": {
+        "exists": {
+          "field": "tran_count"
+        }
+      }
+    }
+  }
+}
+
+
+###
+### Query and Summary Value
+POST http://localhost:9200/logback-2021.12.27/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "constant_score": {
+      "filter": {
+        "exists": {
+          "field": "tran_count"
+        }
+      }
+    }
+  },
+  "aggs": {
+    "hat_prices": { "sum": { "field": "@version" } }
+  }
+}
+
+
+
+
+
+
+

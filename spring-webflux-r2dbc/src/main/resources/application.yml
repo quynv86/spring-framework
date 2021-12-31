@@ -5,3 +5,6 @@ spring:
     url: r2dbc:h2:file:////Users/quynv/Research/spring-framework/shared-folder/database;AUTO_SERVER=TRUE
     username: sa
     password: sa
+    initialize-schema:
+      initialize: true
+      scriptPath: /Users/quynv/Research/spring-framework/shared-folder/r2_dbc.sql

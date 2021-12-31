@@ -16,17 +16,18 @@
     <version>2.6.1</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
-  <version>${vn-quynv-springframework.version}</version>
+  <version>1.0-SNAPSHOT</version>
     <modules>
       <module>spring-integration</module>
-        <module>shared-domain</module>
+      <module>shared-domain</module>
       <module>spring-rest-api</module>
       <module>spring-config-server</module>
       <module>spring-cloud-integration</module>
       <module>spring-cloud-integration-http-inbound</module>
       <module>spring-data-jpa</module>
       <module>reactor-core</module>
-        <module>spring-webflux-r2dbc</module>
+      <module>spring-webflux-r2dbc</module>
+      <module>spring-core</module>
     </modules>
 
   <dependencyManagement>
