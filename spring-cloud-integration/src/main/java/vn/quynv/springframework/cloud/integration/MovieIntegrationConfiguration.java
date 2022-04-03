@@ -28,7 +28,7 @@ public class MovieIntegrationConfiguration {
     private MovieProperties movieProperties;
     private MovieConverter movieConverter;
     /**
-     * SPLIT ==> This method creates a splitter that sets the payload as Iterable, Interator, Array, Stream,
+     * SPLIT ==> This method creates a splitter that sets the payload as Iterable, Iterator, Array, Stream,
      * or a reactive Publisher, and it accepts an implementation of the splitter;
      * in this case, we are using Files.splitter.markers(),
      * which splits the file contents into lines and marks the start and end of the file.

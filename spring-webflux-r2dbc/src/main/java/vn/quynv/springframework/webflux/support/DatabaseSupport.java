@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -36,6 +37,8 @@ public class DatabaseSupport {
         long startInit = System.currentTimeMillis();
         try {
 
+//            byte[] bytes=new byte[];
+//            String SCRIPTS_2= new String(DatabaseSupport.class.getResourceAsStream(properties.getScriptPath()).read(bytes),"UTF-8");
             String SCRIPTS = new String(Files.readAllBytes(Paths.get(properties.getScriptPath())));
             log.info("Initialize Script : \n{}", SCRIPTS);
             Flux.using(() -> Flux.from(factory.create()).blockLast()

@@ -83,6 +83,15 @@ docker run -d --mount source=sharedvolume,target=/usr/share/logstash/pipeline/ -
 
 https://cuongquach.com/elk-tim-hieu-dich-vu-logstash-trong-he-thong-elk-stack-logging.html
 
+[22/12/2021 16:01:03] : Zzr5ljoMulj$XYPA
+[31/12/2021 15:23:10] : ok e
+[31/12/2021 15:24:14] : @C Thuỷ Fis  cvaof ký xác nhận cv cho em nhé ạ
+[31/12/2021 15:26:36] : done rồi em
+[31/12/2021 15:28:43] : Chị đang đưa cháu đi tiêm
+[31/12/2021 15:28:51] : Tẹo về chị làm nhé
+[31/12/2021 16:53:59] : anh ký xót Biên bản thanh lý nhé @Nguyen Van Quy
+[31/12/2021 16:54:04] : em vừa nhắc thông báo laijcho anh đó
+
 
 
 
@@ -91,7 +100,13 @@ docker run -d --name es-container --net es-net -p 9200:9200 -e xpack.security.en
 
 
 
-
+[31/12/2021 15:23:10] : ok e
+[31/12/2021 15:24:14] : @C Thuỷ Fis  cvaof ký xác nhận cv cho em nhé ạ
+[31/12/2021 15:26:36] : done rồi em
+[31/12/2021 15:28:43] : Chị đang đưa cháu đi tiêm
+[31/12/2021 15:28:51] : Tẹo về chị làm nhé
+[31/12/2021 16:53:59] : anh ký xót Biên bản thanh lý nhé @Nguyen Van Quy
+[31/12/2021 16:54:04] : em vừa nhắc thông báo laijcho anh đó
 
 
 

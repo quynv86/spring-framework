@@ -1,5 +1,5 @@
 server:
-  port: 9898
+  port: 80
 spring:
   r2dbc:
     url: r2dbc:h2:file:////Users/quynv/Research/spring-framework/shared-folder/database;AUTO_SERVER=TRUE
@@ -7,4 +7,4 @@ spring:
     password: sa
     initialize-schema:
       initialize: true
-      scriptPath: /Users/quynv/Research/spring-framework/shared-folder/r2_dbc.sql
+      scriptPath: ./shared-folder/r2_dbc.sql

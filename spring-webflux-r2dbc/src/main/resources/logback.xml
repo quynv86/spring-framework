@@ -1,8 +1,8 @@
 <configuration>
 <appender name="STASH" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>/Users/quynv/Research/docker-volume/application-logs/spring-reactor.10.log</file>
+    <file>logs/spring-reactor.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-        <fileNamePattern>/Users/quynv/Research/docker-volume/application-logs/spring-reactor-1.%d{yyyy-MM-dd}.log</fileNamePattern>
+        <fileNamePattern>logs/spring-reactor-1.%d{yyyy-MM-dd}.log</fileNamePattern>
         <maxHistory>7</maxHistory>
     </rollingPolicy>
     <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>

@@ -94,7 +94,7 @@ public class R2dbcTest {
                         .execute()
         ).flatMap(result ->
                 result.getRowsUpdated()
-        ).subscribe((insertCount) -> {
+        ).subscribe((insertCount) -> { 
             log.info("Total insert record: {}", insertCount);
         });
     }
@@ -316,4 +316,26 @@ public class R2dbcTest {
             log.info("Loaded: {}", user);
         });
     }
+
 }
+
+/**
+
+ ===== HE THONG QUAN LY TAI KHOAN =========
+    1. Danh Sach Tai Khoan
+    2. Them Moi Tai Khoan
+    3. Cap Nhat Thong Tin Tai Khoan
+    4. Xoa tai khoan
+    5. Chuyen khoan
+    6. Exit
+ Chọn ...
+
+ */
+
+/**
+
+    ID        Ten Tai Khoan      So Tai Khoan         So Du            Trang Thai
+    1         Nguyen Van A       050100112233         10000            Hieu Luc
+    2         Nguyen Van B       050100112233         20000            Hieu Luc
+
+ */

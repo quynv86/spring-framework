@@ -1,0 +1,10 @@
+server:
+  port: 8181
+spring:
+  r2dbc:
+    url: r2dbc:h2:file:////home/ubuntu/apps/database;AUTO_SERVER=TRUE"
+    username: sa
+    password: sa
+    initialize-schema:
+      initialize: true
+      scriptPath: /home/ubuntu/apps/scripts/r2_dbc.sql
