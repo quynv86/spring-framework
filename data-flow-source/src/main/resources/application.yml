@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    function:
+      definition: publishEvent
+    stream:
+      bindings:
+        publishEvent-out-0:
+          destination: in-app-msg-topic

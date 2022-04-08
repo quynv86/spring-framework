@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    function:
+      definition: processAppMessage
+    stream:
+      bindings:
+        processAppMessage-in-0:
+          destination: in-app-msg-topic
+        processAppMessage-out-0:
+          destination: out-app-msg-topic

@@ -28,6 +28,8 @@
       <module>reactor-core</module>
       <module>spring-webflux-r2dbc</module>
       <module>spring-core</module>
+      <module>data-flow-source</module>
+      <module>data-flow-processor</module>
     </modules>
 
   <dependencyManagement>
@@ -56,7 +58,6 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
