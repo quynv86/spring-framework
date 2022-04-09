@@ -8,3 +8,5 @@ spring:
           destination: in-app-msg-topic
         processAppMessage-out-0:
           destination: out-app-msg-topic
+server:
+  port: 9988

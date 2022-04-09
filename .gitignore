@@ -9,3 +9,6 @@
 /spring-data-jpa/target/
 /reactor-core/target/
 /spring-webflux-r2dbc/target/
+/data-flow-processor/target/
+/data-flow-source/target/
+/spring-core/target/

@@ -15,3 +15,6 @@ There are several modules as bellow:
 
 #### Source code for BOOK : 
 https://github.com/apress/r2dbc-revealed
+https://cloud.spring.io/spring-cloud-stream-binder-kafka/spring-cloud-stream-binder-kafka.html
+
+
