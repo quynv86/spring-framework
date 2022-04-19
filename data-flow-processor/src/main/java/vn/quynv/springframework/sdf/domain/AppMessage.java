@@ -12,5 +12,4 @@ import lombok.NoArgsConstructor;
 public class AppMessage {
     private String message;
     private String channel;
-
 }

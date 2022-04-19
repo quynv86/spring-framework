@@ -101,7 +101,7 @@ public class AppTest {
                 ,(list) -> Flux.fromIterable(list)
                 ,(list)-> {list.clear();
                 });
-        flux.subscribe(number -> log.info("Number is {}", String.valueOf(number)));
+        flux.subscribe(number -> log.info("Number is {}", number));
         Thread.sleep(3_000);
 
     }
@@ -136,8 +136,8 @@ public class AppTest {
         fluxLine.log().limitRate(3)
                 .subscribe(
                 (line) -> log.info("Thread {} : {}", Thread.currentThread().getName(),line)
-                ,(error)-> log.error("Thread {} An error occured {}", Thread.currentThread().getName(),error)
-                ,() -> log.info("Compeleted")
+                ,(error)-> log.error("Thread {} An error occurred {}", Thread.currentThread().getName(),error)
+                ,() -> log.info("Completed")
 
         );
 

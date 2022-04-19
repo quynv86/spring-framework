@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: batch-job-application
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: false # https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/autoconfigure/batch/BatchAutoConfiguration.html
+  datasource:
+#    hikari:
+#      username: root
+#      password: rootpw
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      jdbc-url: jdbc:mysql://localhost:3306/application?useSSL=false
+    url: jdbc:mysql://localhost:3306/application?useSSL=false
+    username: root
+    password: rootpw
+  main:
+    allow-bean-definition-overriding: true
+logging:
+  level:
+    root: info

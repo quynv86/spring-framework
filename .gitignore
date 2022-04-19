@@ -12,3 +12,5 @@
 /data-flow-processor/target/
 /data-flow-source/target/
 /spring-core/target/
+/spring-batch-job/target/
+/spring-data-jpa-best-practice/target/
