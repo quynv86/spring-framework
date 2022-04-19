@@ -8,13 +8,16 @@
         <appender-ref ref="STDOUT" />
     </logger>
 
-    <logger name="org.hibernate.SQL"  level="DEBUG">
+    <logger name="org.hibernate.SQL"  level="INFO">
         <appender-ref ref="STDOUT" />
     </logger>
-    <logger name="org.hibernate.type.descriptor.sql.BasicBinder"  level="TRACE">
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder"  level="INFO">
         <appender-ref ref="STDOUT" />
     </logger>
-    <logger name="org.hibernate"  level="DEBUG">
+    <logger name="org.hibernate"  level="INFO">
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <logger name="net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener"  level="INFO" additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
 

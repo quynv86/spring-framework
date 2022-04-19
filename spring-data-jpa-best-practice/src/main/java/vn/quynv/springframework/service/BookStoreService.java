@@ -38,7 +38,6 @@ public class BookStoreService {
         book.setTitle(bookDTO.getTitle());
         author.getBooks().add(book);
         Book firstBook = author.getBooks().get(0);
-        firstBook.setAuthor(null);
         author.getBooks().remove(firstBook);
     }
 }
