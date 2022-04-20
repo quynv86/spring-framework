@@ -28,6 +28,5 @@ public class RepositoryProfiler {
             long elapsedMs = System.currentTimeMillis() - startMs;
             log.info(joinPoint.getTarget() + "." + joinPoint.getSignature()+ ": Execute time: " + elapsedMs+" (ms) ");
             return result;
-
         }
 }
