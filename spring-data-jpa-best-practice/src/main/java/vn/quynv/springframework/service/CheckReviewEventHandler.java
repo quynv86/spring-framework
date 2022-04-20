@@ -34,7 +34,6 @@ public class CheckReviewEventHandler {
         BookReview bookReview = bookReviewRepository.findById(event.getBookReview().getId()).get();
         log.info("Loaded Book Review. Current status is: {}", bookReview.getStatus().toString());
         bookReview.setStatus(ReviewStatus.APPROVE);
-        throw new RuntimeException("What happened...");
     }
 
     private void safeSleep(long seconds) {
