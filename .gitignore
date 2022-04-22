@@ -15,3 +15,4 @@
 /spring-batch-job/target/
 /spring-data-jpa-best-practice/target/
 /*/*.iml
+*.iml
