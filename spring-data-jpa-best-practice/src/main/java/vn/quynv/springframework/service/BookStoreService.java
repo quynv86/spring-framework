@@ -1,5 +1,6 @@
 package vn.quynv.springframework.service;
 
+import com.querydsl.jpa.impl.JPAQuery;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -84,5 +85,8 @@ public class BookStoreService {
 
     public List<Book> queryBySpecification(BookSpecifications.BookQuery query) {
         return bookRepository.findAll(BookSpecifications.bySpecific(query));
+    }
+    public List<Book> findBooksUsingEntityManager() {
+        return bookRepository.findBookUsingEntityManager();
     }
 }

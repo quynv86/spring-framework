@@ -90,6 +90,13 @@ public class BookStoreServiceTest {
         );
     }
 
+    @Test
+    void find_Books_Using_EntityManager() {
+        log.info("Start finding books using entity manager instated of JpaRepository...");
+        bookRepository.findBookUsingEntityManager().forEach(BookStoreServiceTest::printBook);
+        log.info("Total Books: {}", bookRepository.queryTotalBooksUsingCriteria());
+    }
+
     final static void printBook(Book book) {
         log.info("ISBN: {}, Author: {}, Publisher: {}", book.getIsbn(), book.getAuthor().getName(), book.getAuthor().getPublisher().getCompany());
     }
