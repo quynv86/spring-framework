@@ -27,18 +27,7 @@ public class JpaBestPracticeApp {
     @Bean
     public CommandLineRunner commandLineRunner() {
         return args -> {
-//            bookStoreService.addBook(BookDTO.builder().authorId(1L).title("Spring - " + new Random().nextInt(4))
-//                    .isbn("ISBN-"+new Random().nextInt(4))
-//                    .build());
-//
-//            bookStoreService.loadAllAuthorAndPrintThem();
-
-//            bookStoreService.postReview(BookReviewDTO.builder().bookId(2L)
-//                    .content("Chapter 1 - Not bad at all")
-//                    .email("quynv86@gmail.com").status(ReviewStatus.WAITING)
-//                    .build());
-//              bookStoreService.findAllUsingLeftJoinFetch().forEach(JpaBestPracticeApp::printLog);
-//            bookStoreService.sampleData();
+            log.info("Do nothing here, i prefer using unit test to execute all repositories and services in this project.");
         };
     }
     static final void printLog(Book book) {
