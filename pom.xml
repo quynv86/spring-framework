@@ -30,8 +30,8 @@
       <module>spring-core</module>
       <module>data-flow-source</module>
       <module>data-flow-processor</module>
-        <module>spring-batch-job</module>
-        <module>spring-data-jpa-best-practice</module>
+      <module>spring-batch-job</module>
+      <module>spring-data-jpa-best-practice</module>
     </modules>
 
   <dependencyManagement>

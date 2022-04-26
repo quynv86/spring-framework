@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: simple-api
+  name: simple-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-api
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: simple-api
+    spec:
+      containers:
+      - image: spring/sample-api
+        name: simple-api
+        imagePullPolicy: Never
+        resources: {}
+
+status: {}
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  creationTimestamp: null
+#  labels:
+#    app: demo
+#  name: demo
+#spec:
+#  ports:
+#  - name: 8181-8181
+#    port: 8181
+#    protocol: TCP
+#    targetPort: 8181
+#  selector:
+#    app: demo
+#  type: ClusterIP
+#status:
+#  loadBalancer: {}

@@ -1,2 +1,9 @@
 server:
   port: 8181
+spring:
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:file:./database;AUTO_SERVER=TRUE
+      username: sa
+      password: sa
+      driver-class-name: org.h2.Driver
