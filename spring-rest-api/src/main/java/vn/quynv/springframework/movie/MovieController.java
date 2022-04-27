@@ -34,7 +34,7 @@ public class MovieController {
 
     @GetMapping(value="/greet")
     public ResponseEntity<String> greet() {
-        String replyMessage = String.format("Welcome to own system. Current time is: %s"
+        String replyMessage = String.format("Welcome to own system V1.0. Current time is: %s"
                 , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         log.info(replyMessage);
         return ResponseEntity.ok().body(replyMessage);

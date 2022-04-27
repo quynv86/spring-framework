@@ -30,3 +30,18 @@ https://spring.io/guides/gs/spring-boot-kubernetes/
 
 
 Ghi nho BUILD ca Project truoc khi Build tung Module
+
+
+##### Useful Commands:
+
+SSH :  kubectl exec simple-api-6977df4968-sqsp5  --it -- /bin/sh
+
+Expose Service: kubectl expose deploy simple-api --port 8181 --type=NodePort
+
+Edit deployment: kubectl edit  deployment simple-api
+
+SET IMAGES:  kubectl set image deployment simple-api simple-api=spring/sample-api
+
+ROLLOUT STATUS: kubectl rollout status deployment/simple-api
+
+

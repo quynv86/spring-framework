@@ -12,7 +12,7 @@ spec:
     protocol: TCP
     targetPort: 8181
   selector:
-    app: service-demo
+    app: simple-api
   type: ClusterIP
 status:
   loadBalancer: {}
