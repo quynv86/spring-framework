@@ -32,6 +32,7 @@
       <module>data-flow-processor</module>
       <module>spring-batch-job</module>
       <module>spring-data-jpa-best-practice</module>
+      <module>spring-boot-actuator-prometheus-grafana</module>
     </modules>
 
   <dependencyManagement>

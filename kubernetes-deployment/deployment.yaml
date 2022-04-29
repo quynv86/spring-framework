@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: simple-api
+  name: simple-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: simple-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: simple-api
+    spec:
+      containers:
+      - image: spring/sample-api
+        name: simple-api
+        imagePullPolicy: Never
+        resources: {}
+        volumeMounts:
+          - name: log
+            mountPath: /log
+          - name: pod-info
+            mountPath: /info
+        env:
+          - name: CONFIG_MAP_KEY # Tham chieu den CONFIG MAP
+            valueFrom:
+              configMapKeyRef:
+                name: pod-params
+                key: pod.env.CONFIG_MAP_KEY
+      volumes:
+        - name: log
+          hostPath:
+            path: /Users/quynv/Research/spring-framework/shared-folder/log
+        - name: pod-info
+          downwardAPI:        # Expose Pod Metadata via DownwardAPI, it's so interesting
+            items:
+              - path: "labels"
+                fieldRef:
+                  fieldPath: metadata.labels
+status: {}

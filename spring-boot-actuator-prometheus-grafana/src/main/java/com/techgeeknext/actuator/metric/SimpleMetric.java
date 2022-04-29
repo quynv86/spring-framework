@@ -2,6 +2,7 @@ package com.techgeeknext.actuator.metric;
 
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Timer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -21,6 +22,8 @@ public class SimpleMetric {
     public SimpleMetric(MeterRegistry meterRegistry) {
         this.meterRegistry = meterRegistry;
         exposeMetric();
+        for (Gauge gauge : meterRegistry.get("abcbc").gauges()) {
+        }
     }
 
 //    @Scheduled(fixedRateString = "3000", initialDelayString = "0")
@@ -35,6 +38,7 @@ public class SimpleMetric {
         }).tag("tag-key","calculate-fee").register(meterRegistry);
 
         log.info("Try to expose new Gauge");
+
     }
 
 }

@@ -30,9 +30,9 @@ public class RestApiApplication
         @Override
         public void stop() {
             log.info("Graceful shutdown.....");
-            final int MAX_TIME_OUT = 10;
+            final int MAX_TIME_OUT = 1;
             int timeOut = 0;
-            while(timeOut++ < MAX_TIME_OUT){
+            while(timeOut++ <= MAX_TIME_OUT){
                 log.info("Waiting for all job finish...");
                 try {
                     Thread.currentThread().sleep(1_000);

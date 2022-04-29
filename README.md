@@ -45,3 +45,9 @@ SET IMAGES:  kubectl set image deployment simple-api simple-api=spring/sample-ap
 ROLLOUT STATUS: kubectl rollout status deployment/simple-api
 
 
+#### About Volumes In Kubernetes:
+Link: https://viblo.asia/p/kubernetes-series-bai-6-volume-gan-disk-storage-vao-container-OeVKB6rrKkW
+
+ 
+
+
