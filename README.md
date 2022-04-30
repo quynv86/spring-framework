@@ -49,7 +49,15 @@ ROLLOUT STATUS: kubectl rollout status deployment/simple-api
 Link: https://viblo.asia/p/kubernetes-series-bai-6-volume-gan-disk-storage-vao-container-OeVKB6rrKkW
 
 #### Create Rancher
+```
 docker run -d --restart=unless-stopped -p 80:80 -p 443:443 --privileged  rancher/rancher:latest
- 
+```
+#### Update Deployment by command:
+```
+    kubectl set image deployment simple-api simple-api=localhost:5001/sample-api:v0.0.2
+```
 
-
+#### Create Docker Registry
+```
+docker run -d -p 5000:5000 --restart always --name registry registry:2
+```

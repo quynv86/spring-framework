@@ -14,5 +14,6 @@
 /spring-core/target/
 /spring-batch-job/target/
 /spring-data-jpa-best-practice/target/
+/spring-boot-actuator-prometheus-grafana/target/
 /*/*.iml
 *.iml

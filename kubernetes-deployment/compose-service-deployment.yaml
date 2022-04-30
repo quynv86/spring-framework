@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: simple-api
+  name: simple-api
+  namespace: default
+  resourceVersion: "8560"
+spec:
+  clusterIP: 10.100.17.229
+  clusterIPs:
+    - 10.100.17.229
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - nodePort: 30899
+      port: 8889
+      protocol: TCP
+      targetPort: 8889
+  selector:
+    app: simple-api
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer:
+    ingress:
+      - hostname: localhost
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: simple-api
+  name: simple-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: simple-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: simple-api
+    spec:
+      containers:
+        - image: localhost:5001/sample-api:v0.0.2
+          name: simple-api
+          imagePullPolicy: Always
+          resources: {}
+          volumeMounts:
+            - name: log
+              mountPath: /log
+            - name: pod-info
+              mountPath: /info
+          env:
+            - name: CONFIG_MAP_KEY # Tham chieu den CONFIG MAP
+              valueFrom:
+                configMapKeyRef:
+                  name: pod-params
+                  key: pod.env.CONFIG_MAP_KEY
+      volumes:
+        - name: log
+          hostPath:
+            path: /Users/quynv/Research/spring-framework/shared-folder/log
+        - name: pod-info
+          downwardAPI:        # Expose Pod Metadata via DownwardAPI, it's so interesting
+            items:
+              - path: "labels"
+                fieldRef:
+                  fieldPath: metadata.labels
+status: {}
