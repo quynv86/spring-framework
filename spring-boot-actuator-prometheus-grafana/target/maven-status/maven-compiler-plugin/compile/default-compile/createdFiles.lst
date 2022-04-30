@@ -1,4 +1,0 @@
-com/techgeeknext/actuator/controller/ActuatorExampleController.class
-com/techgeeknext/actuator/SpringBootActuatorPrometheusGrafanaApplication.class
-com/techgeeknext/actuator/health/CustomHealthIndicator.class
-com/techgeeknext/actuator/metric/SimpleMetric.class
