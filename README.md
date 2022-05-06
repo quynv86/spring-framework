@@ -61,3 +61,17 @@ docker run -d --restart=unless-stopped -p 80:80 -p 443:443 --privileged  rancher
 ```
 docker run -d -p 5000:5000 --restart always --name registry registry:2
 ```
+
+
+```aidl
+kubectl delete pvc data-my-release-mariadb-0
+kubectl delete pvc data-my-release-rabbitmq-0
+helm install my-release bitnami/spring-cloud-dataflow
+
+kubectl get pvc
+
+
+
+
+
+```
