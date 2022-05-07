@@ -72,6 +72,16 @@ kubectl get pvc
 
 
 
+# Install GIt Lab:
+https://computingforgeeks.com/how-to-install-gitlab-ce-on-ubuntu-linux/
+root Password: ednMQhtmjz3USvpIDhK781vKMp9KQDmNF9es/wKEVlQ=
+
+Git Book: https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History
+# Limit by times
+git log --pretty=format:"%h %s" --graph --since=30.minutes
+
+
+
 
 
 ```
