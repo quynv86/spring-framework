@@ -22,16 +22,16 @@ public class BatchJobApplication {
     @Autowired
     JobLauncher jobLauncher;
 
-    @Autowired
-    @Qualifier("partitionerJob")
-    Job partitionerJob;
-
-    @Bean
-    CommandLineRunner commandLineRunner() {
-        return args -> {
-            jobLauncher.run(partitionerJob, new JobParametersBuilder().addLong("Current-Time", System.currentTimeMillis())
-                    .toJobParameters());
-        };
-    }
+//    @Autowired
+//    @Qualifier("partitionerJob")
+//    Job partitionerJob;
+//
+//    @Bean
+//    CommandLineRunner commandLineRunner() {
+//        return args -> {
+//            jobLauncher.run(partitionerJob, new JobParametersBuilder().addLong("Current-Time", System.currentTimeMillis())
+//                    .toJobParameters());
+//        };
+//    }
 
 }

@@ -138,6 +138,7 @@ server:
   ## @param server.command Override default container command (useful when using custom images)
   ##
   command: []
+
   ## @param server.args Override default container args (useful when using custom images)
   ##
   args: []

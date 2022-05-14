@@ -18,6 +18,13 @@
     <version>1.0-SNAPSHOT</version>
     <relativePath>../</relativePath>
   </parent>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>nexus-repos</id>
+      <url>http://nexus-repos:8081/repository/maven-snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
   <dependencies>
     <dependency>
       <groupId>vn.quynv.springframework</groupId>

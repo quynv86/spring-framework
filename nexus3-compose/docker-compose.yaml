@@ -1,0 +1,16 @@
+version: "3"
+services:
+  nexus:
+    image: sonatype/nexus3
+    restart: always
+    volumes:
+      - "nexus-data:/sonatype-work"
+    ports:
+      - "8081:8081"
+      - "8085:8085"
+      - "8082:8082"
+      - "8083:8083"
+
+volumes:
+  nexus-data: {}
+# Admin password: 53c4ec47-c3d3-476c-9da7-3e3646a910be cat /nexus-data/admin.password
