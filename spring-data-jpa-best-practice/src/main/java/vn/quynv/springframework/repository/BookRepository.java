@@ -13,4 +13,6 @@ public interface BookRepository extends JpaRepository<Book, Long> , JpaSpecifica
     @Query(value="select b from Book b left join fetch b.author a left join fetch a.publisher p")
     List<Book> findAllUsingLeftJoinFetch();
 
+    @Query(value="select b.id, b.isbn, b.title from Book b")
+    List<Object[]> queryAndReturnListArrayOfObject();
 }

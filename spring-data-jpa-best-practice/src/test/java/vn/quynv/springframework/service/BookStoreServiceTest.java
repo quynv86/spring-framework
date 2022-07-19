@@ -18,6 +18,7 @@ import vn.quynv.springframework.service.specification.BookSpecifications;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 @SpringBootTest
 @Slf4j
@@ -99,5 +100,13 @@ public class BookStoreServiceTest {
 
     final static void printBook(Book book) {
         log.info("ISBN: {}, Author: {}, Publisher: {}", book.getIsbn(), book.getAuthor().getName(), book.getAuthor().getPublisher().getCompany());
+    }
+
+    @Test
+    void queryBookReturnListArrayOfObject(){
+       List<Object[]> listArraysOfObject = bookRepository.queryAndReturnListArrayOfObject();
+       listArraysOfObject.forEach(objects -> {
+           log.info("Arrays size: {}", objects.length);
+       });
     }
 }

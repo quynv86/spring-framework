@@ -17,6 +17,7 @@ spring:
       username: sa
       password: sa
       driver-class-name: org.h2.Driver
+      maximum-pool-size: 20
 server:
   port: 8888
 logging:
