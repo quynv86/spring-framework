@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import vn.quynv.springframework.entity.Author;
 import vn.quynv.springframework.entity.Bestseller;
@@ -16,6 +17,7 @@ import vn.quynv.springframework.repository.BookRepository;
 import vn.quynv.springframework.repository.PublisherRepository;
 import vn.quynv.springframework.service.specification.BookSpecifications;
 
+import javax.persistence.Tuple;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -108,5 +110,32 @@ public class BookStoreServiceTest {
        listArraysOfObject.forEach(objects -> {
            log.info("Arrays size: {}", objects.length);
        });
+    }
+
+    @Test
+    void testCustomizeDTO_Using_ClassBase() {
+        bookRepository.summaryBookByAuthor().forEach(sumDTO -> {
+            log.info("SUM_RESULT [Author_ID: {}, Count: {} ]",sumDTO.getAuthorId(), sumDTO.getTotalBook());
+        });
+    }
+
+    @Test
+    void findAll_And_Paginate() {
+        log.info("Total elements: {}", bookRepository.findAllAndPaginate(PageRequest.of(1,1)).getTotalElements());
+    }
+
+
+    @Test
+    void testCustomizeDTO_Using_ClassBase_And_Paginate() {
+        bookRepository.summaryBookByAuthor_And_Paginate(PageRequest.of(1,1)).forEach(sumDTO -> {
+            log.info("SUM_RESULT [Author_ID: {}, Count: {} ]",sumDTO.getAuthorId(), sumDTO.getTotalBook());
+        });
+    }
+
+    @Test
+    void test_Tuple_Using_And_Paginate() {
+        Page<Tuple> page = bookRepository.findAll_Return_Tuple_And_Paginate(PageRequest.of(1,1));
+        log.info("Total page: {}", page.getTotalPages());
+
     }
 }
