@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import vn.quynv.springframework.domain.BookDTO;
 import vn.quynv.springframework.entity.Author;
 import vn.quynv.springframework.entity.Bestseller;
 import vn.quynv.springframework.entity.Book;
@@ -15,6 +16,7 @@ import vn.quynv.springframework.repository.BookRepository;
 import vn.quynv.springframework.repository.PublisherRepository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.Arrays;
@@ -140,4 +142,59 @@ public class JPATest {
         });
     }
 
+    @Test
+    void query_Using_Parameter_Expression() {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Book> query = cb.createQuery(Book.class);
+        Root<Book> fromBook = query.from(Book.class);
+        ParameterExpression<String> titleLikeParam = cb.parameter(String.class);
+        query.select(fromBook).where(cb.like(fromBook.get("title"),titleLikeParam));
+        TypedQuery<Book> typedQuery  = entityManager.createQuery(query);
+        typedQuery.setParameter(titleLikeParam,"Linux Toval");
+        typedQuery.getResultList().stream().forEach(this::printBook);
+    }
+
+    @Test
+    void query_Using_Criteria_And_Map_To_DTO() {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<BookDTO> query = cb.createQuery(BookDTO.class);
+        Root<Book> fromBook = query.from(Book.class);
+        ParameterExpression<String> titleLikeParam = cb.parameter(String.class);
+        query.select(cb.construct(
+                        BookDTO.class,
+                        fromBook.get("id"),
+                        fromBook.get("isbn"),
+                        fromBook.get("title"),
+                        fromBook.get("author").get("id")
+                )
+        ).where(cb.like(fromBook.get("title"), titleLikeParam));
+        TypedQuery<BookDTO> typedQuery = entityManager.createQuery(query);
+        typedQuery.setParameter(titleLikeParam, "Spring Best%");
+        typedQuery.setFirstResult(0);
+        typedQuery.setMaxResults(10);
+        typedQuery.getResultList().stream().forEach(this::printBookDTO);
+    }
+
+    @Test
+    void query_Return_Tuple_Instate_Of_DTO() {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Tuple> query = cb.createQuery(Tuple.class);
+        Root<Book> fromBook = query.from(Book.class);
+
+        query.multiselect(
+                fromBook.get("id").alias("bookId")
+                ,fromBook.get("isbn").alias("bookISBN")
+        );
+
+        TypedQuery<Tuple> typeQuery = entityManager.createQuery(query);
+        typeQuery.getResultList().stream().forEach((row) -> {
+            log.info("[Book: ID: {}, ISBN: {}]", row.get("bookId"), row.get("bookISBN"));
+        });
+    }
+    public void printBook(Book book) {
+        log.info("Got book: {}", book);
+    }
+    public void printBookDTO(BookDTO book) {
+        log.info("Got book: {}", book);
+    }
 }
