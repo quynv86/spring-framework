@@ -1,4 +1,4 @@
-# This Project Is Full Demo For Spring Application Framework
+# This Project Is Full Demo For Spring Framework Application
 
 There are several modules as bellow: 
 ```aidl
