@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import vn.quynv.springframework.domain.BookDTO;
 import vn.quynv.springframework.entity.Author;
 import vn.quynv.springframework.entity.Bestseller;
@@ -180,6 +181,26 @@ public class JPATest {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Tuple> query = cb.createQuery(Tuple.class);
         Root<Book> fromBook = query.from(Book.class);
+
+        query.multiselect(
+                fromBook.get("id").alias("bookId")
+                ,fromBook.get("isbn").alias("bookISBN")
+        );
+
+        TypedQuery<Tuple> typeQuery = entityManager.createQuery(query);
+        typeQuery.getResultList().stream().forEach((row) -> {
+            log.info("[Book: ID: {}, ISBN: {}]", row.get("bookId"), row.get("bookISBN"));
+        });
+    }
+
+    @Test
+    void query_Criteria_Join() {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Tuple> query = cb.createQuery(Tuple.class);
+        Root<Book> fromBook = query.from(Book.class);
+
+        Join<Book, Author> authorJoin = fromBook.join("author", JoinType.INNER);
+        authorJoin.on(cb.like(authorJoin.get("name"),"abc123"));
 
         query.multiselect(
                 fromBook.get("id").alias("bookId")
