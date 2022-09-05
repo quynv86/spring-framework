@@ -18,6 +18,7 @@ import vn.quynv.springframework.repository.PublisherRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Tuple;
+import javax.persistence.TupleElement;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.Arrays;
@@ -88,10 +89,11 @@ public class JPATest {
         Predicate withBestSellAuthor = rBook.get("author").get("id").in(subQueryAuthorIds);
         query.select(rBook).where(cb.not(withBestSellAuthor));
 
-        TypedQuery<Book> typedQuery = entityManager.createQuery(query);
+        TypedQuery<Book> typedQuery = entityManager.createQuery(query).setHint();
         typedQuery.getResultList().stream().forEach((b) -> {
             log.info("Got : {}", b);
         });
+
         // SQL Will be like :
         /**
          *  select
@@ -212,10 +214,46 @@ public class JPATest {
             log.info("[Book: ID: {}, ISBN: {}]", row.get("bookId"), row.get("bookISBN"));
         });
     }
+
+    @Test
+    void transform_Data_Using_CallBack() {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Tuple> query = cb.createQuery(Tuple.class);
+        Root<Book> fromBook = query.from(Book.class);
+
+        Join<Book, Author> authorJoin = fromBook.join("author", JoinType.INNER);
+//        authorJoin.on(cb.like(authorJoin.get("name"),"abc123"));
+
+        query.multiselect(
+                fromBook.get("id").alias("bookId")
+                ,fromBook.get("isbn").alias("bookISBN")
+        );
+
+//        TypedQuery<Tuple> typeQuery = entityManager.createQuery(query);
+//        typeQuery.getResultList().stream().forEach((row) -> {
+//            log.info("[Book: ID: {}, ISBN: {}]", row.get("bookId"), row.get("bookISBN"));
+//        });
+        log.info("--------------------- Interface Callback ---------------------");
+        TypedQuery<Tuple> typeQuery = entityManager.createQuery(query);
+        typeQuery.getResultList().stream().forEach((row) -> {
+            this.printOutTuple(row, row2-> {
+                log.info("First Element: {}", row2.get(1));
+            });
+        });
+        log.info("--------------------- END Interface Callback -----------------");
+    }
     public void printBook(Book book) {
         log.info("Got book: {}", book);
     }
     public void printBookDTO(BookDTO book) {
         log.info("Got book: {}", book);
+    }
+
+    interface ResultCallBack {
+        void transform(Tuple row);
+    }
+
+    void printOutTuple(Tuple tuple, ResultCallBack callBack) {
+        callBack.transform(tuple);
     }
 }
