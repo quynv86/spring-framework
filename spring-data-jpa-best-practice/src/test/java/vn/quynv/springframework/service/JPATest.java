@@ -89,7 +89,7 @@ public class JPATest {
         Predicate withBestSellAuthor = rBook.get("author").get("id").in(subQueryAuthorIds);
         query.select(rBook).where(cb.not(withBestSellAuthor));
 
-        TypedQuery<Book> typedQuery = entityManager.createQuery(query).setHint();
+        TypedQuery<Book> typedQuery = entityManager.createQuery(query);
         typedQuery.getResultList().stream().forEach((b) -> {
             log.info("Got : {}", b);
         });
