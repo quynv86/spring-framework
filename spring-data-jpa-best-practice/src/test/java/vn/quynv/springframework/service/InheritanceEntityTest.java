@@ -47,11 +47,12 @@ public class InheritanceEntityTest {
 
     @Test
     void queryAllAnimal() {
+        // query base object will query all sub objects.
         entityManager.createQuery("select a from Animal a", Animal.class)
                 .getResultList().forEach(a -> {
                     log.info("Got Animal with name: {}. Type: {}", a.getName(), a.getClass().getName());
 
                 });
-
     }
+
 }
