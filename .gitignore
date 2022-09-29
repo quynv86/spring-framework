@@ -17,3 +17,4 @@
 /spring-boot-actuator-prometheus-grafana/target/
 /*/*.iml
 *.iml
+/logs/

@@ -3,6 +3,7 @@ package vn.quynv.springframework;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import io.r2dbc.spi.Parameter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
@@ -21,6 +22,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 /**
@@ -204,4 +206,40 @@ public class AppTest {
 
         return Flux.fromIterable(Arrays.asList(number));
     }
+
+    @Test
+    void create_Flux_Using_Create_Method() throws InterruptedException {
+        StringCreator stringCreator = new StringCreator();
+        stringCreator.createStringFlux().subscribe(System.out::println);
+        new Thread(()->{
+            for(int i=0; i<10; i++) {
+                stringCreator.getConsumer().accept("Nguyen " + System.currentTimeMillis());
+                try {
+                    Thread.sleep(1_000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
+        Thread.sleep(12000);
+    }
+
+    class StringCreator {
+        Consumer<String> consumer;
+        public Consumer<String> getConsumer(){
+            return this.consumer;
+        }
+        public Flux<String> createStringFlux() {
+            return Flux.create(sink -> {
+                this.consumer = item ->sink.next(item);
+            });
+        }
+    }
+
+    @Test
+    void checkFormat() {
+        Integer aNumber=new Integer(10);
+        System.out.println(aNumber/3.0);
+    }
+
 }
