@@ -80,8 +80,13 @@ Git Book: https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History
 # Limit by times
 git log --pretty=format:"%h %s" --graph --since=30.minutes
 
-
-
-
-
 ```
+
+#### Port-forward to access the spring-cloud-data-flow
+````aidl
+kubectl port-forward service/scdf-spring-cloud-dataflow-server 9090:8080
+````
+#### Go to dashboard by flowing URL
+````aidl
+http://localhost:9090/dashboard
+````

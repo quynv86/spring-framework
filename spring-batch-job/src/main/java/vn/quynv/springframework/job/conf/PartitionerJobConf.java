@@ -119,5 +119,4 @@ public class PartitionerJobConf {
         partitioner.setResources(resources);
         return partitioner;
     }
-
 }

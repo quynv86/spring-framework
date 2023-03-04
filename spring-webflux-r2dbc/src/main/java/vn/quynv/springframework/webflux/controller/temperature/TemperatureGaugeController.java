@@ -23,7 +23,6 @@ public class TemperatureGaugeController {
 //            }
 //        });
         return Flux.create((sink) -> {
-            this.
         });
 //        return response;
     }
